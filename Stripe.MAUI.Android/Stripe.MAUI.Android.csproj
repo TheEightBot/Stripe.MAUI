@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net7.0-android</TargetFramework>
+		<SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<EmbedAllSources>True</EmbedAllSources>
+		<StripeVersion>20.34.3</StripeVersion>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="XamPrototype.Android.MavenBinding.Tasks" Version="0.0.11" />
+		<PackageReference Include="Xamarin.KotlinX.Coroutines.Core" Version="1.6.4.2" />
+		<PackageReference Include="Xamarin.KotlinX.Coroutines.Android" Version="1.6.4.2" />
+		<PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="1.8.22" />
+		<PackageReference Include="Xamarin.AndroidX.DataBinding.ViewBinding" Version="8.1.1" />
+		<PackageReference Include="Xamarin.Google.Android.Material" Version="1.8.0" />
+		<PackageReference Include="Xamarin.AndroidX.Annotation" Version="1.6.0.4" />
+	</ItemGroup>
+	<PropertyGroup>
+		<!-- https://github.com/jpobst/Prototype.Android.MavenBindings/blob/37da8d5ea14a87a754b28620bde12a9799079a99/src/Microsoft.Android.MavenBinding.Tasks/XamPrototype.Android.MavenBinding.Tasks.targets#L11C1-L13C162 -->
+		<CacheDirectory Condition="'$(OS)'=='Unix'">$(HOME)\Library\Caches\MavenCacheDirectory\</CacheDirectory>
+		<CacheDirectory Condition="'$(OS)'!='Unix'">$(LocalAppData)\MavenCacheDirectory\</CacheDirectory>
+	</PropertyGroup>
+	<ItemGroup>
+		<!-- Stripe files -->
+		<AndroidMavenLibrary Include="com.stripe:stripe-android" Version="$(StripeVersion)" Pack="True" />
+		<AndroidMavenLibrary Include="com.stripe:payments-core" Version="$(StripeVersion)" Bind="False" />
+		<AndroidMavenLibrary Include="com.stripe:paymentsheet" Version="$(StripeVersion)" Pack="True" />
+		<AndroidMavenLibrary Include="com.stripe:stripe-core" Version="$(StripeVersion)" Bind="False" />
+		<AndroidMavenLibrary Include="com.stripe:payments-model" Version="$(StripeVersion)" Pack="True" />
+		<AndroidMavenLibrary Include="com.stripe:stripe-ui-core" Version="$(StripeVersion)" Bind="False" />
+		<!-- Workaround to force nuget to include necessary aars in the package, https://github.com/xamarin/xamarin-android/issues/8308#issuecomment-1701616581-->
+	</ItemGroup>
+</Project>
